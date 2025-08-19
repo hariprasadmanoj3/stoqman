@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -8,7 +10,7 @@ from rest_framework_simplejwt.views import (
 
 # Import viewsets
 from inventory.views import ProductViewSet, CategoryViewSet
-from billing.views import InvoiceViewSet, CustomerViewSet
+from billing.views import InvoiceViewSet, CustomerViewSet, InvoiceItemViewSet
 from users.views import UserViewSet
 
 # Create router and register viewsets
@@ -16,6 +18,7 @@ router = DefaultRouter()
 router.register(r'products', ProductViewSet)
 router.register(r'categories', CategoryViewSet)
 router.register(r'invoices', InvoiceViewSet)
+router.register(r'invoice-items', InvoiceItemViewSet)  # Add this line
 router.register(r'customers', CustomerViewSet)
 router.register(r'users', UserViewSet)
 
@@ -26,3 +29,6 @@ urlpatterns = [
     path('api/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/reports/', include('reports.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
