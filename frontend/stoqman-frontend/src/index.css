@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6;
+  }
+  
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500;
+  }
+}
+
+@media print {
+  /* Hide everything by default */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Show only printable content */
+  .print-content,
+  .print-content * {
+    visibility: visible;
+  }
+  
+  /* Position printable content */
+  .print-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+  }
+  
+  /* Page settings */
+  @page {
+    margin: 0.5in;
+    size: A4 portrait;
+  }
+  
+  /* Remove shadows and backgrounds for better printing */
+  .print-content {
+    box-shadow: none !important;
+    background: white !important;
+  }
+  
+  /* Ensure colors print correctly */
+  .print-content * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  
+  /* Hide interactive elements */
+  button,
+  .no-print {
+    display: none !important;
+  }
+  
+  /* Optimize text for printing */
+  .print-content {
+    font-size: 12pt !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Ensure proper page breaks */
+  .print-content table {
+    page-break-inside: avoid;
+  }
+  
+  .print-content tr {
+    page-break-inside: avoid;
+  }
+}
+
+/* PDF generation loading animation */
+@keyframes pdfGenerate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.pdf-generating {
+  animation: pdfGenerate 1s ease-in-out infinite;
+}
