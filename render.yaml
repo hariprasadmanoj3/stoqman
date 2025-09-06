@@ -2,9 +2,9 @@ services:
   - type: web
     name: stoqman-backend
     env: python
-    workingDirectory: backend          # Important: tells Render to run commands inside backend
+    workingDirectory: backend
     buildCommand: |
-      pip install --upgrade -r requirements.txt
+      pip install --upgrade -r backend/requirements.txt
       python manage.py migrate
       python manage.py collectstatic --no-input
     startCommand: "gunicorn config.wsgi:application --bind 0.0.0.0:$PORT"
