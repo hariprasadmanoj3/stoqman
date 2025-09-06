@@ -19,3 +19,5 @@ services:
         value: "3.11.0"
     autoDeploy: true
     healthCheckPath: "/api/health/"
+
+
