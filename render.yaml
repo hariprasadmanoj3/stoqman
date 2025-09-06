@@ -2,7 +2,7 @@ services:
   - type: web
     name: stoqman-backend
     env: python
-    workingDirectory: backend   # <--- add this
+    workingDirectory: backend        # <-- important
     buildCommand: |
       pip install --upgrade -r requirements.txt
       python manage.py migrate
